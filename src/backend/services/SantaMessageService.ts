@@ -92,7 +92,7 @@ export const sendMessage = (
     username: user?.username,
     address: userProfile.address,
     giftMessage: gift_message,
-    subject: "Santa Message'"
+    subject: "Santa Message"
   };
   
   emailQueue.enqueue(emailTask);

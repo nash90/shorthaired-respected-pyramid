@@ -4,7 +4,7 @@
 
 ## Note
 
-- APP is deployed using versel, please check app at this link [app link](https://shorthaired-respected-pyramid-qdysa7nt7-nash90.vercel.app)
+- APP is deployed using versel, please check app at this link on new tab [app link](https://shorthaired-respected-pyramid-qdysa7nt7-nash90.vercel.app)
   - https://shorthaired-respected-pyramid-qdysa7nt7-nash90.vercel.app
 - app doesnt install on Glitch because glitch has 200 MB disk space limitation and next js framework dependency installation takes more space than this limit
 - test data date format at "birthdate": "2010/23/01", It is assumed that this is in format "YYYY/DD/MM"
