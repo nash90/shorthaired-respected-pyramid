@@ -50,15 +50,21 @@ App Run command for dev mode:
 The project's code is organized as follows:
 
 - **src/app**: This directory contains the Next.js app, including server and client routes, layout components, and middleware configurations.
+  - **src/app/page.tsx**: Home page of next application by default
+  - **src/app/layout.tsx**: Common root layout of next page, has many functions that can be confirmed from next.js doc
+  - **src/app/api/santa_message/route.ts**: one of the rest api route defination
 
 - **src/backend**: All backend code is placed in this directory.
 
   - **src/backend/route-handler**: Exported route handler module functions for API routes handling using NextRequest and NextResponse.
 
   - **src/backend/services**: Files containing core backend logic for features such as Email Task Queue Consumer-Producer, Email Send client, User Info fetch API clients, and validation logic.
+    - **src/backend/services/SantaEmailQueue**: Queue Consumer producer implementation using JS array, setInterval, clearInterval
+    - **src/backend/services/SantaMessageService**: Provides helper for request validations like registration check and age check
+    - **src/backend/services/SantaEmailService**: Provides helper for sending email
+    - **src/backend/services/UserService**: Provides helper for fetching user lists and profiles from external api
 
 - **src/frontend**: This directory contains client-side code, including React components and client-side API request makers.
 
 - **src/types**: Files that define general types used throughout the application, including business logic models, API requests, and responses.
-
 
