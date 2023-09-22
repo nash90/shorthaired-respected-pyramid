@@ -1,6 +1,7 @@
 import { SantaMessageApiRequest } from "@/type/SantaMessageApiRequest";
 import { UserModel } from "@/type/UserModel";
 import { UserProfileModel } from "@/type/UserProfileModel";
+import { EmailQueue, EmailTask } from "./SantaEmailQueue";
 
 export const getUserAndProfile = (
   req: SantaMessageApiRequest,
@@ -78,6 +79,21 @@ export const validateSantaMessageReq = (
 };
 
 
-export const sendMessage = (req: SantaMessageApiRequest) => {
+export const sendMessage = (
+  user: UserModel,
+  userProfile: UserProfileModel,
+  gift_message: string
+) => {
+  const emailQueue = new EmailQueue();
 
+  const emailTask: EmailTask = {
+    from: "do_not_reply@northpole.com",
+    to: "santa@northpole.com",
+    username: user?.username,
+    address: userProfile.address,
+    giftMessage: gift_message,
+    subject: "Santa Message'"
+  };
+  
+  emailQueue.enqueue(emailTask);
 }

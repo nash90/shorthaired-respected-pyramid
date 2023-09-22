@@ -2,7 +2,9 @@ import { SantaMessageApiRequest } from "@/type/SantaMessageApiRequest";
 import { SantaMessageApiResponse } from "@/type/SantaMessageApiResponse";
 import { NextRequest, NextResponse } from "next/server";
 import { getAllUsers, getUserProfiles } from "../services/UserService";
-import { getUserAndProfile, validateSantaMessageReq } from "../services/SantaMessageService";
+import { getUserAndProfile, sendMessage, validateSantaMessageReq } from "../services/SantaMessageService";
+import { UserModel } from "@/type/UserModel";
+import { UserProfileModel } from "@/type/UserProfileModel";
 
 export const sendMessageToSantaHandler = async (req: NextRequest) => {
   const messageReq = await req.json() as SantaMessageApiRequest;
@@ -36,10 +38,12 @@ export const sendMessageToSantaHandler = async (req: NextRequest) => {
     }, { status: 400 });
   }
 
-  
-
   // If validation passes, proceed with sending the message
-  // Your message sending logic here
+  sendMessage(
+    user as UserModel, // null check done in validation
+    userProfile as UserProfileModel, 
+    messageReq.gift_message
+  )
 
   return NextResponse.json({
     status: "success",
