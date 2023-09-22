@@ -23,16 +23,14 @@ This project relies on the following library dependencies and the reasons for in
 ## How to Run the App
 
 To run the app after cloning the repo, follow these steps:
-
-1. Install the required dependencies with npm:
+Install the required dependencies with npm:
    ```bash
     npm install
   ```
-2. App Run command for dev mode
+App Run command for dev mode:
    ```bash
     npm run dev
   ```
-
 
 ## Code Structure Guide
 
@@ -42,9 +40,9 @@ The project's code is organized as follows:
 
 - **src/backend**: All backend code is placed in this directory.
 
-  - **src/backend/route-handler**: Exported root handler functions for API routes using NextRequest and NextResponse.
+  - **src/backend/route-handler**: Exported route handler module functions for API routes handling using NextRequest and NextResponse.
 
-  - **src/backend/services**: Files containing core backend logic for features such as Email Task Queue Consumer Producer, Email Send client, User Info fetch API clients, and validation logic.
+  - **src/backend/services**: Files containing core backend logic for features such as Email Task Queue Consumer-Producer, Email Send client, User Info fetch API clients, and validation logic.
 
 - **src/frontend**: This directory contains client-side code, including React components and client-side API request makers.
 
