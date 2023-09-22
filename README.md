@@ -14,11 +14,8 @@ This project relies on the following library dependencies and the reasons for in
 
 - **Nodemailer (v6.9.5)**: Nodemailer is used for sending emails within the application.
 
-- **@mui/material (v5.14.10)**: The Material-UI library is included to provide a responsive design out of the box.
+- **Bootstrap (v5.3.0)**: This UI library is included to provide a responsive design out of the box.
 
-- **@emotion/react (v11.11.1)**: This is a dependency of Material-UI for styling.
-
-- **@emotion/styled (v11.11.0)**: Another dependency of Material-UI for styling.
 
 ## How to Run the App
 
