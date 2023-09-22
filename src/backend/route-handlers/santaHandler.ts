@@ -2,12 +2,12 @@ import { SantaMessageApiRequest } from "@/type/SantaMessageApiRequest";
 import { SantaMessageApiResponse } from "@/type/SantaMessageApiResponse";
 import { NextRequest, NextResponse } from "next/server";
 import { getAllUsers, getUserProfiles } from "../services/UserService";
-import { validateSantaMessageReq } from "../services/SantaMessageService";
+import { getUserAndProfile, validateSantaMessageReq } from "../services/SantaMessageService";
 
 export const sendMessageToSantaHandler = async (req: NextRequest) => {
   const messageReq = await req.json() as SantaMessageApiRequest;
 
-  // Fetch users and user profiles
+  // Fetch users and user profiles from api
   const usersResponse = await getAllUsers();
   const userProfilesResponse = await getUserProfiles();
 
@@ -22,8 +22,11 @@ export const sendMessageToSantaHandler = async (req: NextRequest) => {
   const users = await usersResponse.json();
   const userProfiles = await userProfilesResponse.json();
 
-  // Validate the request
-  const validationResult = validateSantaMessageReq(messageReq, users, userProfiles);
+  // find user and profile info for user request
+  const {user, userProfile} = getUserAndProfile(messageReq, users, userProfiles)
+
+  // Validate the user and profile
+  const validationResult = validateSantaMessageReq(user, userProfile);
 
   if (!validationResult.isValid) {
     // Return a 400 error with the validation error message
@@ -32,6 +35,8 @@ export const sendMessageToSantaHandler = async (req: NextRequest) => {
       message: validationResult.error,
     }, { status: 400 });
   }
+
+  
 
   // If validation passes, proceed with sending the message
   // Your message sending logic here

@@ -2,35 +2,32 @@ import { SantaMessageApiRequest } from "@/type/SantaMessageApiRequest";
 import { UserModel } from "@/type/UserModel";
 import { UserProfileModel } from "@/type/UserProfileModel";
 
-export const validateSantaMessageReq = (
+export const getUserAndProfile = (
   req: SantaMessageApiRequest,
   users: UserModel[],
   userProfiles: UserProfileModel[],
 ) => {
   const { username } = req;
 
-  // Check if the user is registered
-  const userExists = users.some((user) => user.username === username);
+  // Get the user based on the username
+  const user = users.find((user) => user.username === username);
 
-  if (!userExists) {
+  // Get the userProfile based on the user's uid
+  const userProfile = user ? userProfiles.find((profile) => profile.userUid === user.uid) : undefined;
+
+  return { user, userProfile };
+};
+
+export const validateSantaMessageReq = (
+  user: UserModel | undefined,
+  userProfile: UserProfileModel | undefined,
+) => {
+  if (!user) {
     return {
       isValid: false,
       error: "User is not registered.",
     };
   }
-
-  // Find the user's uid based on the username
-  const user = users.find((user) => user.username === username);
-
-  if (!user) {
-    return {
-      isValid: false,
-      error: "User profile not found.",
-    };
-  }
-
-  // Find the user's birthdate using the user's uid
-  const userProfile = userProfiles.find((profile) => profile.userUid === user.uid);
 
   if (!userProfile) {
     return {
@@ -39,11 +36,7 @@ export const validateSantaMessageReq = (
     };
   }
 
-  // const userBirthdate = new Date(userProfile.birthdate); // will not parse correct for  "username": "bugs.bunny", "birthdate": "2010/23/01"
-  // const currentYear = new Date().getFullYear();
-  // const userAge = currentYear - userBirthdate.getFullYear();
-
-  // assuming test data for "username": "bugs.bunny", "birthdate": "2010/23/01", is in correct format of "YYYY/DD/MM" instead
+  // Parse the birthdate
   const birthdateParts = userProfile.birthdate.split('/');
   
   if (birthdateParts.length !== 3) {
@@ -70,7 +63,6 @@ export const validateSantaMessageReq = (
     userAge--;
   }
 
-  
   // Check if the user is over 10 years old
   if (userAge > 10) {
     return {
