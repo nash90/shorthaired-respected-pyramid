@@ -27,6 +27,14 @@ This project relies on the following library dependencies and the reasons for in
 ## How to Run the App
 
 To run the app after cloning the repo, follow these steps:
+Provide ENV variable setting in .env.local, for security inject this value from a secure CI/CD pipeline rather than hardcodeing:
+   ```bash
+    USER_SERVICE_API=https://raw.githubusercontent.com
+    EMAIL_HOST_ID=smtp.ethereal.email
+    EMAIL_PORT=587
+    EMAIL_AUTH_ID=YOUR_AUTH_ID
+    EMAIL_AUTH_PASSWORD=YOUR_AUTH_PASSWORD
+  ```
 Install the required dependencies with npm:
    ```bash
     npm install
