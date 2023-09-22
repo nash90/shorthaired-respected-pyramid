@@ -1,10 +1,11 @@
-import { SantaMessageApiRequest } from "@/type/SantaMessageApiRequest";
-import { SantaMessageApiResponse } from "@/type/SantaMessageApiResponse";
 import { NextRequest, NextResponse } from "next/server";
 import { getAllUsers, getUserProfiles } from "../services/UserService";
 import { getUserAndProfile, sendMessage, validateSantaMessageReq } from "../services/SantaMessageService";
-import { UserModel } from "@/type/UserModel";
-import { UserProfileModel } from "@/type/UserProfileModel";
+import { SantaMessageApiRequest } from "../../type/SantaMessageApiRequest";
+import { UserModel } from "../../type/UserModel";
+import { UserProfileModel } from "../../type/UserProfileModel";
+import { SantaMessageApiResponse } from "../../type/SantaMessageApiResponse";
+
 
 export const sendMessageToSantaHandler = async (req: NextRequest) => {
   const messageReq = await req.json() as SantaMessageApiRequest;

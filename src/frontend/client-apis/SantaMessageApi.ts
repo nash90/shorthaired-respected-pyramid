@@ -1,5 +1,5 @@
-import { SantaMessageApiRequest } from "@/type/SantaMessageApiRequest"
-import { SantaMessageApiResponse } from "@/type/SantaMessageApiResponse"
+import { SantaMessageApiRequest } from "../../type/SantaMessageApiRequest"
+import { SantaMessageApiResponse } from "../../type/SantaMessageApiResponse"
 
 const UNKNOWN_API_RESPONSE_DATA = "Something went wrong, please try again later"
 

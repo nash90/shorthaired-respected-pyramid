@@ -1,6 +1,6 @@
-import { SantaMessageApiRequest } from "@/type/SantaMessageApiRequest";
-import { UserModel } from "@/type/UserModel";
-import { UserProfileModel } from "@/type/UserProfileModel";
+import { SantaMessageApiRequest } from "../../type/SantaMessageApiRequest";
+import { UserModel } from "../../type/UserModel";
+import { UserProfileModel } from "../../type/UserProfileModel";
 import { EmailQueue, EmailTask } from "./SantaEmailQueue";
 
 export const getUserAndProfile = (
