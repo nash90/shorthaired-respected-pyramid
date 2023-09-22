@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Santa Message Web App
 
-## Getting Started
+![Web App Screenshot](/public/Home.png)
 
-First, run the development server:
+## Library Dependencies and Reasons
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This project relies on the following library dependencies and the reasons for including them:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Next.js (v13.5.2)**: Next.js is a versatile framework that provides modern server-side rendering (SSR) and client-side rendering (CSR) capabilities. It also offers several bundle optimization techniques and supports static site generation, making it ideal for building modern web applications.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **React (v18.2.0)**: React is the core library for building user interfaces. We use the latest version to take advantage of advanced UI capabilities and state management.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **TypeScript (v5.2.2)**: TypeScript is included to provide strong typing and improve code maintainability throughout the application.
 
-## Learn More
+- **Nodemailer (v6.9.5)**: Nodemailer is used for sending emails within the application.
 
-To learn more about Next.js, take a look at the following resources:
+- **@mui/material (v5.14.10)**: The Material-UI library is included to provide a responsive design out of the box.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **@emotion/react (v11.11.1)**: This is a dependency of Material-UI for styling.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- **@emotion/styled (v11.11.0)**: Another dependency of Material-UI for styling.
 
-## Deploy on Vercel
+## How to Run the App
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+To run the app after cloning the repo, follow these steps:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Install the required dependencies with npm:
+   ```bash
+    npm install
+  ```
+2. App Run command for dev mode
+   ```bash
+    npm run dev
+  ```
+
+
+## Code Structure Guide
+
+The project's code is organized as follows:
+
+- **src/app**: This directory contains the Next.js app, including server and client routes, layout components, and middleware configurations.
+
+- **src/backend**: All backend code is placed in this directory.
+
+  - **src/backend/route-handler**: Exported root handler functions for API routes using NextRequest and NextResponse.
+
+  - **src/backend/services**: Files containing core backend logic for features such as Email Task Queue Consumer Producer, Email Send client, User Info fetch API clients, and validation logic.
+
+- **src/frontend**: This directory contains client-side code, including React components and client-side API request makers.
+
+- **src/types**: Files that define general types used throughout the application, including business logic models, API requests, and responses.
+
+
