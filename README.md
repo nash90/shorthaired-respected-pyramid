@@ -3,11 +3,11 @@
 ![Web App Screenshot](/public/Home.png)
 
 ## Note
-- app doesnt run on Glitch because glitch has 200 MB disk space limitation and next js dependency installation takes more space than this limit
 - test data date format at "birthdate": "2010/23/01", It is assumed that this is in format "YYYY/DD/MM"
 - Consumer Producer is impleted using a Queue tasks store stored inmemory as JS array
 - The consumer batch is started when new task is added to an empty queue, Batch feature is impleted with setInterval
 - for resource saving, when queue is empty the consumer batch is dropped (clearInterval) till new task is added
+- app doesnt run on Glitch because glitch has 200 MB disk space limitation and next js dependency installation takes more space than this limit
 
 ## Library Dependencies and Reasons
 
@@ -27,6 +27,7 @@ This project relies on the following library dependencies and the reasons for in
 ## How to Run the App
 
 To run the app after cloning the repo, follow these steps:
+
 Provide ENV variable setting in .env.local, for security inject this value from a secure CI/CD pipeline rather than hardcodeing:
    ```bash
     USER_SERVICE_API=https://raw.githubusercontent.com
