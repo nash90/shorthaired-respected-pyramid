@@ -4,12 +4,12 @@ import { SantaMessageApiResponse } from "@/type/SantaMessageApiResponse"
 const UNKNOWN_API_RESPONSE_DATA = "Something went wrong, please try again later"
 
 export const sendMessageToSanta = async ( 
-  user_id: string,
+  username: string,
   gift_message: string
 ) => {
 
   const message = {
-    user_id,
+    username,
     gift_message,
   } as SantaMessageApiRequest
 
@@ -24,6 +24,8 @@ export const sendMessageToSanta = async (
   })
 
   const resData = await res.json() as SantaMessageApiResponse
+  // console.log("resData", resData)
+
   if (!resData) {
     throw Error(UNKNOWN_API_RESPONSE_DATA)
   }

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { sendMessageToSanta } from "../client-apis/SantaMessageApi";
 
 const SantaLetterForm: React.FC = () => {
-  const [user_id, setUserId] = useState("");
+  const [username, setUserName] = useState("");
   const [gift_message, setGiftMessage] = useState("");
   const [isSending, setIsSending] = useState(false);
 
@@ -12,7 +12,7 @@ const SantaLetterForm: React.FC = () => {
   const [apiError, setApiError] = useState("");
 
   const clearForm = () => {
-    setUserId("");
+    setUserName("");
     setGiftMessage("");
     setApiError("");
   };
@@ -25,8 +25,8 @@ const SantaLetterForm: React.FC = () => {
     setGiftMessageError("");
     setApiError("");
 
-    if (!user_id) {
-      setUserError("User ID is required");
+    if (!username) {
+      setUserError("User Name is required");
       isValid = false;
     }
 
@@ -38,27 +38,31 @@ const SantaLetterForm: React.FC = () => {
     return isValid;
   };
 
-  const handleSendMessageClick = async () => {
-    setIsSending(true);
-
-    try {
-      if (!clientSideValidation()) {
-        return;
-      }
-
-      const res = await sendMessageToSanta(user_id, gift_message);
-      if (res.status === "success") {
-        alert(res.message);
-      } else {
-        setApiError(res.message);
-      }
-      clearForm();
-      
-    } catch (error) {
-      setApiError("There was an error sending your message to Santa. Please try again later.");
-    } finally {
-      setIsSending(false);
+  const handleSendMessageClick = () => {
+    // Perform client-side validation before sending the message
+    if (!clientSideValidation()) {
+      return;
     }
+  
+    setIsSending(true);
+  
+    // Call sendMessageToSanta and handle the promise with then and catch
+    sendMessageToSanta(username, gift_message)
+      .then((res) => {
+        if (res.status === "success") {
+          alert(res.message);
+          clearForm();
+        } else if (res.status === "error") {
+          // Handle bad req API error here
+          setApiError(res.message);
+        }
+      })
+      .catch((error) => {
+        setApiError("There was an error sending your message to Santa. Please try again later.");
+      })
+      .finally(() => {
+        setIsSending(false);
+      });
   };
   
   return (
@@ -76,31 +80,32 @@ const SantaLetterForm: React.FC = () => {
           label="Who are you?"
           placeholder="firstname.lastname"
           variant="standard"
-          value={user_id}
-          onChange={(e) => setUserId(e.target.value)}
+          value={username}
+          onChange={(e) => setUserName(e.target.value)}
           error={!!userError || !!apiError}
           helperText={userError || ""}
         />
       </div>
       <div>
-      <TextField
-        label="what do you want for christmas?"
-        multiline
-        minRows={5}
-        placeholder="Gifts"
-        variant="standard"
-        value={gift_message}
-        onChange={(e) => setGiftMessage(e.target.value)}
-        error={!!giftMessageError || !!apiError}
-        helperText={giftMessageError || ""}
-      />
+        <TextField
+          label="What do you want for Christmas?"
+          multiline
+          minRows={5}
+          placeholder="Gifts"
+          variant="standard"
+          value={gift_message}
+          onChange={(e) => setGiftMessage(e.target.value)}
+          error={!!giftMessageError || !!apiError}
+          helperText={giftMessageError || ""}
+        />
       </div>
       <Button variant="contained" onClick={handleSendMessageClick} disabled={isSending}>
         {isSending ? "Sending..." : "Send"}
       </Button>
-      {apiError && <p style={{ color: "red" }}>{apiError}</p>}
+      {apiError !== "" && <p style={{ color: "red" }}>{apiError}</p>}
     </Box>
-  )
+  );
+  
 }
 
 export {

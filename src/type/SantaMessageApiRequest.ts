@@ -1,4 +1,4 @@
 export type SantaMessageApiRequest = {
-  user_id: string;
+  username: string;
   gift_message: string;
 }

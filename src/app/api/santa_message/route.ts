@@ -1,4 +1,4 @@
-import { sendMessageToSantaHandler } from "@/backend/route-handlers/santaHandler"
+import { sendMessageToSantaHandler } from "@/backend/route-handlers/SantaHandler"
 import { NextRequest } from "next/server"
 
 export async function POST(
