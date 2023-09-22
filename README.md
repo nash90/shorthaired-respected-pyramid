@@ -3,11 +3,15 @@
 ![Web App Screenshot](/public/Home.png)
 
 ## Note
+
+- APP is deployed using versel, please check app at this link [app link](https://shorthaired-respected-pyramid-qdysa7nt7-nash90.vercel.app)
+  - https://shorthaired-respected-pyramid-qdysa7nt7-nash90.vercel.app
+- app doesnt install on Glitch because glitch has 200 MB disk space limitation and next js framework dependency installation takes more space than this limit
 - test data date format at "birthdate": "2010/23/01", It is assumed that this is in format "YYYY/DD/MM"
 - Consumer Producer is impleted using a Queue tasks store stored inmemory as JS array
 - The consumer batch is started when new task is added to an empty queue, Batch feature is impleted with setInterval
 - for resource saving, when queue is empty the consumer batch is dropped (clearInterval) till new task is added
-- app doesnt run on Glitch because glitch has 200 MB disk space limitation and next js dependency installation takes more space than this limit
+
 
 ## Library Dependencies and Reasons
 
