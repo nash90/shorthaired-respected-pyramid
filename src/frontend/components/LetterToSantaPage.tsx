@@ -1,7 +1,6 @@
 'use client';
 
-import { Container, Paper, Typography } from "@mui/material"
-import { SantaLetterForm } from "./SantaLetterForm"
+import SantaLetterForm from "./SantaLetterForm";
 
 interface PageProps {
   title?: string
@@ -9,18 +8,17 @@ interface PageProps {
 
 const LetterToSantaPage: React.FC<PageProps> = (props) => {
   return (
-    <Container>
-      <Paper sx={{
-        mt: 20,
-        p: 2
-      }}>
-        <Typography variant="h3">A Letter to Santa</Typography>
-        <SantaLetterForm/>
-      </Paper>
-    </Container>
-  )
+    <div className="container mt-4"> {/* Use the Bootstrap container class */}
+      <div className="row justify-content-center"> {/* Center content */}
+        <div className="col-md-8"> {/* Define column width for medium-sized screens */}
+          <div className="p-3"> {/* Apply padding */}
+            <h3 className="mb-4">A Letter to Santa</h3> {/* Apply margin-bottom */}
+            <SantaLetterForm/>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export {
-  LetterToSantaPage
-}
+export default LetterToSantaPage;

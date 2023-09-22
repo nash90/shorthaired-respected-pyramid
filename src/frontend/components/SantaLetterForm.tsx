@@ -1,6 +1,6 @@
-import { Box, Button, TextField } from "@mui/material"
 import { useState } from "react";
 import { sendMessageToSanta } from "../client-apis/SantaMessageApi";
+
 
 const SantaLetterForm: React.FC = () => {
   const [username, setUserName] = useState("");
@@ -43,9 +43,9 @@ const SantaLetterForm: React.FC = () => {
     if (!clientSideValidation()) {
       return;
     }
-  
+
     setIsSending(true);
-  
+
     // Call sendMessageToSanta and handle the promise with then and catch
     sendMessageToSanta(username, gift_message)
       .then((res) => {
@@ -64,50 +64,48 @@ const SantaLetterForm: React.FC = () => {
         setIsSending(false);
       });
   };
-  
+
   return (
-    <Box
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <div>
-        <TextField
+    <form className="container mt-4">
+      <div className="mb-3">
+        <label htmlFor="letter-santa-name" className="form-label">
+          Who are you?
+        </label>
+        <input
+          type="text"
           id="letter-santa-name"
-          label="Who are you?"
+          className={`form-control ${userError || apiError ? "is-invalid" : ""}`}
           placeholder="firstname.lastname"
-          variant="standard"
           value={username}
           onChange={(e) => setUserName(e.target.value)}
-          error={!!userError || !!apiError}
-          helperText={userError || ""}
         />
+        {userError && <div className="invalid-feedback">{userError}</div>}
       </div>
-      <div>
-        <TextField
-          label="What do you want for Christmas?"
-          multiline
-          minRows={5}
+      <div className="mb-3">
+        <label htmlFor="gift-message" className="form-label">
+          What do you want for Christmas?
+        </label>
+        <textarea
+          id="gift-message"
+          rows={5}
+          className={`form-control ${giftMessageError || apiError ? "is-invalid" : ""}`}
           placeholder="Gifts"
-          variant="standard"
           value={gift_message}
           onChange={(e) => setGiftMessage(e.target.value)}
-          error={!!giftMessageError || !!apiError}
-          helperText={giftMessageError || ""}
         />
+        {giftMessageError && <div className="invalid-feedback">{giftMessageError}</div>}
       </div>
-      <Button variant="contained" onClick={handleSendMessageClick} disabled={isSending}>
+      <button
+        type="button"
+        className="btn btn-primary"
+        onClick={handleSendMessageClick}
+        disabled={isSending}
+      >
         {isSending ? "Sending..." : "Send"}
-      </Button>
-      {apiError !== "" && <p style={{ color: "red" }}>{apiError}</p>}
-    </Box>
+      </button>
+      {apiError && <div className="text-danger mt-2">{apiError}</div>}
+    </form>
   );
-  
-}
+};
 
-export {
-  SantaLetterForm
-}
+export default SantaLetterForm;

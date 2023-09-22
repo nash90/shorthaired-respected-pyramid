@@ -1,4 +1,4 @@
-import { LetterToSantaPage } from "@/frontend/components/LetterToSantaPage";
+import LetterToSantaPage from "@/frontend/components/LetterToSantaPage";
 
 export default function Home() {
   return (
